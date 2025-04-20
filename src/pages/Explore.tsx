@@ -40,6 +40,10 @@ const Explore = () => {
   // }, [data, page]);
 
   useEffect(() => {
+    document.body.classList.toggle("dark", darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
