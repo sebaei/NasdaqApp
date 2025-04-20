@@ -1,5 +1,5 @@
 import React from "react";
-import NasdaqLogo from "../assets/Nasdaq.webp";
+import NasdaqLogo from "../assets/nasdaq-logo-dark.webp";
 import "../styles/Splash.scss";
 
 const SplashScreen = () => (

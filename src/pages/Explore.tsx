@@ -19,7 +19,7 @@ const Explore = () => {
     isError,
   } = useFetchStocks(debouncedSearch);
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const loaderRef = useRef(null);
 
@@ -73,7 +73,10 @@ const Explore = () => {
       ) : (
         <StockGrid stocks={stocks} />
       )}
-      <div ref={loaderRef} className={`${isFetchingNextPage && "loader"}`} />
+      <div
+        ref={loaderRef}
+        className={`${isFetchingNextPage ? "loader" : ""}`}
+      />
     </div>
   );
 };

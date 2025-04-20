@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Header.scss";
-import NasdaqLogo from "../assets/Nasdaq.webp";
+import NasdaqLogo from "../assets/nasdaq-logo-dark.webp";
 import SearchIcon from "../assets/SearchIcon";
 
 type HeaderProps = {
@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
       <button className="toggle-btn" onClick={toggleDarkMode}>
-        {darkMode ? "Light Mode" : "Dark Mode"}
+        {darkMode ? "Dark Mode" : "Light Mode"}
       </button>
     </header>
   );
