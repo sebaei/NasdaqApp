@@ -10,8 +10,14 @@ const Explore = () => {
   const [page, setPage] = useState(1);
   const [allStocks, setAllStocks] = useState<any>([]);
   const debouncedSearch = useDebounce(search, 750);
-  const { stocks, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useFetchStocks(debouncedSearch);
+  const {
+    stocks,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+  } = useFetchStocks(debouncedSearch);
 
   const [darkMode, setDarkMode] = useState(false);
 
@@ -51,6 +57,10 @@ const Explore = () => {
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  if (isError) {
+    return <div>Error fetching data.</div>;
+  }
+
   return (
     <div className={`explore-container ${darkMode ? "dark" : ""}`}>
       <Header
@@ -58,9 +68,12 @@ const Explore = () => {
         darkMode={darkMode}
         toggleDarkMode={() => setDarkMode((prev) => !prev)}
       />
-
-      <StockGrid stocks={stocks} />
-      <div ref={loaderRef} className="loader" />
+      {!isLoading && stocks.length === 0 ? (
+        <div className="no-results">No Stocks found.</div>
+      ) : (
+        <StockGrid stocks={stocks} />
+      )}
+      <div ref={loaderRef} className={`${isFetchingNextPage && "loader"}`} />
     </div>
   );
 };
