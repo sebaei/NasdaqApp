@@ -1,6 +1,7 @@
-import React from 'react';
-import '../styles/Header.scss';
-import NasdaqLogo from "../assets/Nasdaq.webp"
+import React from "react";
+import "../styles/Header.scss";
+import NasdaqLogo from "../assets/Nasdaq.webp";
+import SearchIcon from "../assets/SearchIcon";
 
 type HeaderProps = {
   onSearch: (value: string) => void;
@@ -8,20 +9,25 @@ type HeaderProps = {
   toggleDarkMode: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ onSearch, darkMode, toggleDarkMode }) => {
+const Header: React.FC<HeaderProps> = ({
+  onSearch,
+  darkMode,
+  toggleDarkMode,
+}) => {
   return (
-    <header className={`explore-header ${darkMode ? 'dark' : ''}`}>
-      <img src={NasdaqLogo} alt='Nasdaq Logo' className='logo' />
+    <header className={`explore-header ${darkMode ? "dark" : ""}`}>
+      <img src={NasdaqLogo} alt="Nasdaq Logo" className="logo" />
       <div className="search-container">
+        <SearchIcon />
         <input
           type="text"
-          placeholder="Stocks..."
+          placeholder="Search by Ticker..."
           onChange={(e) => onSearch(e.target.value)}
           className="search-input"
         />
       </div>
       <button className="toggle-btn" onClick={toggleDarkMode}>
-        {darkMode ? 'Light Mode' : 'Dark Mode'}
+        {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
     </header>
   );

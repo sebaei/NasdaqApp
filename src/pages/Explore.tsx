@@ -1,22 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useFetchStocks } from '../hooks/useFetchStocks';
-import StockGrid from '../components/StockGrid';
-import useDebounce from '../hooks/useDebounce';
-import "../styles/Explore.scss" 
-import Header from '../components/Header';
+import React, { useEffect, useRef, useState } from "react";
+import { useFetchStocks } from "../hooks/useFetchStocks";
+import StockGrid from "../components/StockGrid";
+import useDebounce from "../hooks/useDebounce";
+import "../styles/Explore.scss";
+import Header from "../components/Header";
 
 const Explore = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [allStocks, setAllStocks] = useState<any>([]);
-  const debouncedSearch = useDebounce(search, 750)
- const { stocks, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchStocks(debouncedSearch);
+  const debouncedSearch = useDebounce(search, 750);
+  const { stocks, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useFetchStocks(debouncedSearch);
 
-  
   const [darkMode, setDarkMode] = useState(false);
 
-  
-  
   const loaderRef = useRef(null);
 
   const handleSearch = (value: string) => {
@@ -25,9 +23,9 @@ const Explore = () => {
     setSearch(value);
   };
 
-//   const handleSearch = () => {
-// console.log('Search');
-//   };
+  //   const handleSearch = () => {
+  // console.log('Search');
+  //   };
 
   // useEffect(() => {
   //   if (data?.pages?.[0]?.results.length) {
@@ -42,7 +40,7 @@ const Explore = () => {
           fetchNextPage();
         }
       },
-      {threshold: 1.0 }
+      { threshold: 1.0 }
     );
 
     const currentRef = loaderRef.current;
@@ -53,21 +51,18 @@ const Explore = () => {
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-
-
-return (
-     <div className={`explore-container ${darkMode ? 'dark' : ''}`}>
+  return (
+    <div className={`explore-container ${darkMode ? "dark" : ""}`}>
       <Header
         onSearch={handleSearch}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode(prev => !prev)}
+        toggleDarkMode={() => setDarkMode((prev) => !prev)}
       />
 
       <StockGrid stocks={stocks} />
-
-      <div ref={loaderRef} className="loader-space" />
+      <div ref={loaderRef} className="loader" />
     </div>
   );
-}
+};
 
 export default Explore;
