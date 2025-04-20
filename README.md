@@ -35,6 +35,8 @@ npm install
 
 ## Tests
 
+### 1. Unit Tests
+
 ```bash
 npx jest
 # Or
