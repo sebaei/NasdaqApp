@@ -7,8 +7,6 @@ import Header from "../components/Header";
 
 const Explore = () => {
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [allStocks, setAllStocks] = useState<any>([]);
   const debouncedSearch = useDebounce(search, 750);
   const {
     stocks,
@@ -24,20 +22,8 @@ const Explore = () => {
   const loaderRef = useRef(null);
 
   const handleSearch = (value: string) => {
-    setPage(1);
-    setAllStocks([]);
     setSearch(value);
   };
-
-  //   const handleSearch = () => {
-  // console.log('Search');
-  //   };
-
-  // useEffect(() => {
-  //   if (data?.pages?.[0]?.results.length) {
-  //     setAllStocks(data?.pages?.[0]?.results)
-  //   }
-  // }, [data, page]);
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
