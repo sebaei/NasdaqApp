@@ -32,3 +32,11 @@ npm install
 ```bash
  npm run start
 ```
+
+## Tests
+
+```bash
+npx jest
+# Or
+npm run test
+```
