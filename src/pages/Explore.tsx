@@ -10,9 +10,8 @@ const Explore = () => {
   const [page, setPage] = useState(1);
   const [allStocks, setAllStocks] = useState<any>([]);
   const debouncedSearch = useDebounce(search, 750)
- const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchStocks(debouncedSearch);
+ const { stocks, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchStocks(debouncedSearch);
 
-  console.log(data);
   
   const [darkMode, setDarkMode] = useState(false);
 
@@ -30,11 +29,11 @@ const Explore = () => {
 // console.log('Search');
 //   };
 
-  useEffect(() => {
-    if (data?.pages?.[0]?.results.length) {
-      setAllStocks(data?.pages?.[0]?.results)
-    }
-  }, [data, page]);
+  // useEffect(() => {
+  //   if (data?.pages?.[0]?.results.length) {
+  //     setAllStocks(data?.pages?.[0]?.results)
+  //   }
+  // }, [data, page]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,7 +42,7 @@ const Explore = () => {
           fetchNextPage();
         }
       },
-      {rootMargin: '100px 0px 0px 0px', threshold: 1.0 }
+      {threshold: 1.0 }
     );
 
     const currentRef = loaderRef.current;
@@ -64,7 +63,7 @@ return (
         toggleDarkMode={() => setDarkMode(prev => !prev)}
       />
 
-      <StockGrid stocks={data?.pages[0].results} />
+      <StockGrid stocks={stocks} />
 
       <div ref={loaderRef} className="loader-space" />
     </div>
