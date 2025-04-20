@@ -52,7 +52,7 @@ const Explore = () => {
   }
 
   return (
-    <div className={`explore-container ${darkMode ? "dark" : ""}`}>
+    <main className={`explore-container ${darkMode ? "dark" : ""}`}>
       <Header
         onSearch={handleSearch}
         darkMode={darkMode}
@@ -67,7 +67,7 @@ const Explore = () => {
         ref={loaderRef}
         className={`${isFetchingNextPage ? "loader" : ""}`}
       />
-    </div>
+    </main>
   );
 };
 

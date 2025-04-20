@@ -19,6 +19,9 @@ const Header: React.FC<HeaderProps> = ({
       <img src={NasdaqLogo} alt="Nasdaq Logo" className="logo" />
       <div className="search-container">
         <SearchIcon />
+        <label htmlFor="search-input" className="hidden">
+          Search by Ticker
+        </label>
         <input
           type="text"
           placeholder="Search by Ticker..."
